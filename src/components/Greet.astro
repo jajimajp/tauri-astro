@@ -1,0 +1,21 @@
+---
+---
+
+<div>
+  <input
+    id="name"
+    type="text"
+    placeholder="Enter a name..."
+  />
+  <button id="greet">Greet</button>
+  <div id="res" />
+</div>
+
+<script>
+  import { invoke } from '@tauri-apps/api'
+  document.getElementById('greet')?.addEventListener('click', async () => {
+    const name = document.getElementById('name')?.value
+    const res = await invoke('greet', { name })
+    document.getElementById('res')!.innerText = `${res} You've been greeted from Rust!`
+  })
+</script>
